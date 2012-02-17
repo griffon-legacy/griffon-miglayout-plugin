@@ -1,17 +1,27 @@
 griffon.project.dependency.resolution = {
+    // implicit variables
+    // pluginName:     plugin's name
+    // pluginVersion:  plugin's version
+    // pluginDirPath:  plugin's install path
+    // griffonVersion: current Griffon version
+    // groovyVersion:  bundled groovy
+    // springVersion:  bundled Spring
+    // antVertsion:    bundled Ant
+    // slf4jVersion:   bundled Slf4j
+
+    // inherit Griffon' default dependencies
     inherits "global"
     log "warn"
     repositories {
-        griffonPlugins()
         griffonHome()
-        griffonCentral()
         mavenCentral()
-        mavenRepo 'http://repository.sonatype.org/content/groups/public'
+
+        // pluginDirPath is only available when installed
+        // String basePath = pluginDirPath? "${pluginDirPath}/" : ''
+        // flatDir name: "${pluginName}LibDir", dirs: ["${basePath}lib"]
     }
     dependencies {
-        compile('com.miglayout:miglayout:3.7.4') {
-            excludes 'substance', 'junit'
-        }
+        compile 'com.miglayout:miglayout-swing:4.2'
     }
 }
 
@@ -23,5 +33,16 @@ griffon {
     }
 }
 
-griffon.jars.destDir='target/addon'
-griffon.plugin.pack.additional.sources = ['src/gdsl']
+log4j = {
+    // Example of changing the log pattern for the default console
+    // appender:
+    appenders {
+        console name: 'stdout', layout: pattern(conversionPattern: '%d [%t] %-5p %c - %m%n')
+    }
+
+    error 'org.codehaus.griffon',
+          'org.springframework',
+          'org.apache.karaf',
+          'groovyx.net'
+    warn  'griffon'
+}
