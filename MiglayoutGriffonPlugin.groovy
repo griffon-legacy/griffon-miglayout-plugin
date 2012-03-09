@@ -1,5 +1,5 @@
 /*
- * Copyright 2010 the original author or authors.
+ * Copyright 2010-2012 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the 'License');
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ class MiglayoutGriffonPlugin {
     // the version or versions of Griffon the plugin is designed for
     String griffonVersion = '0.9.5 > *'
     // the other plugins this plugin depends on
-    Map dependsOn = [:]
+    Map dependsOn = [swing: '0.9.5']
     // resources that are included in plugin packaging
     List pluginIncludes = []
     // the plugin license
@@ -63,7 +63,7 @@ This node supports the following properties
 
  * **layoutConstraints** - defines general constraints
  * **columnConstraints** - defines constraints applicable to columns only
- * **rowsConstraints** - defines constraints applicable to rows only
+ * **rowConstraints** - defines constraints applicable to rows only
 
 The plugin includes a copy of the MigLayout white-paper in PDF format. Refer also to the [MigLayout Cheatsheet][2] 
 to know more about what constraints can be used with this layout.
